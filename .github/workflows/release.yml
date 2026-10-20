@@ -1,0 +1,66 @@
+# Builds the Windows desktop app and publishes a GitHub release when a version tag is pushed:
+#   git tag v1.0.0 && git push origin v1.0.0
+# Release assets:
+#   FET Lab_<ver>_x64-setup.exe   installer (NSIS)        FET Lab_<ver>_x64_en-US.msi   installer (MSI)
+#   FET-Lab-portable.exe          no install, needs WebView2 (built into Windows 10/11)
+#   FET-Lab-web.zip               the plain web app: unzip and open index.html in any browser
+#   fetlab.html                   the whole app in one HTML file
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install Tauri CLI
+        run: npm install
+
+      - name: Build the web app (zip + single file)
+        shell: pwsh
+        run: |
+          python tools/export_site.py build/web
+          python tools/build.py
+          Compress-Archive -Path build/web/* -DestinationPath FET-Lab-web.zip
+
+      - name: Build desktop app and create the release
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "FET Lab ${{ github.ref_name }}"
+          releaseBody: |
+            **Windows:** download `FET Lab_*_x64-setup.exe` (installer) or `FET-Lab-portable.exe` (no install).
+            **Any OS, no install:** download `FET-Lab-web.zip`, unzip it and open `index.html`, or open `fetlab.html` directly.
+          releaseDraft: false
+          prerelease: false
+
+      - name: Attach portable exe and web builds
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          Copy-Item src-tauri/target/release/fet-lab.exe FET-Lab-portable.exe
+          gh release upload "${{ github.ref_name }}" FET-Lab-portable.exe FET-Lab-web.zip dist/fetlab.html --clobber

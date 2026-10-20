@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FET Lab gömme örneği · embed demo</title>
+  <style>
+    body { margin: 0; font: 16px/1.6 system-ui, sans-serif; background: #f4f4f6; color: #222; }
+    main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 80px; }
+    h1 { font-size: 1.6rem; }
+    pre { background: #fff; border: 1px solid #ddd; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: .85rem; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 12px; }
+    button { padding: 6px 12px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Kendi sitende FET Lab · FET Lab on your own site</h1>
+  <p>Bu sayfa, uygulamanın başka bir siteye nasıl gömüleceğini gösterir. This page shows how to embed the app in another site.</p>
+  <pre>&lt;div data-fetlab data-page="simulator" data-lang="tr"&gt;&lt;/div&gt;
+&lt;script src="/fetlab/embed.js" defer&gt;&lt;/script&gt;</pre>
+
+  <h2>1 · Tek bölüm (yüksekliği kendini ayarlar) · One chapter, auto height</h2>
+  <div class="row">
+    <button onclick="FETLab.navigate(document.getElementById('a'),'simulator')">Simülatör</button>
+    <button onclick="FETLab.navigate(document.getElementById('a'),'mosfet')">MOSFET</button>
+    <button onclick="FETLab.setLang(document.getElementById('a'),'en')">EN</button>
+    <button onclick="FETLab.setLang(document.getElementById('a'),'tr')">TR</button>
+    <button onclick="FETLab.setTheme(document.getElementById('a'),'dark')">Dark</button>
+    <button onclick="FETLab.setTheme(document.getElementById('a'),'light')">Light</button>
+  </div>
+  <div id="a" data-fetlab data-page="simulator" data-lang="tr" data-theme="light" data-nav="1"></div>
+
+  <h2>2 · Tam uygulama (menülü, sabit yükseklik) · Full app, fixed height</h2>
+  <div data-fetlab data-full="1" data-height="820" data-page="home"></div>
+</main>
+<script src="embed.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "fet-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive transistor and MOSFET driving lab (static web app + Tauri desktop shell)",
+  "license": "MIT",
+  "scripts": {
+    "web": "python tools/export_site.py build/web",
+    "bundle": "python tools/build.py",
+    "tauri": "tauri",
+    "desktop": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.1"
+  }
+}

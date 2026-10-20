@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FET Lab — Transistör ve MOSFET sürme</title>
+  <meta name="description" content="Interactive, bilingual (TR/EN) lab for driving BJTs and MOSFETs from a microcontroller: load calculation, gate/base drive, inductive loads, PWM switching, inrush and overcurrent protection.">
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bai+Jamjuree:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23E7E6FB'/%3E%3Cpath d='M3 16h5M24 16h5' stroke='%236B7290' stroke-width='2'/%3E%3Crect x='8' y='10' width='16' height='12' rx='5' fill='%23fff' stroke='%233D4360'/%3E%3Cpath d='M11.5 10.5v11M15 10.5v11M18.5 10.5v11' stroke-width='2.2' stroke='%23C2408A'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-label="Menü">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="brand" href="#home">
+      <svg class="brand-mark" viewBox="0 0 34 18" aria-hidden="true"><path class="lead" d="M0 9h7M27 9h7"/><rect class="body" x="7" y="2.5" width="20" height="13" rx="5"/><rect x="10.5" y="3" width="2.4" height="12" fill="var(--band-1)"/><rect x="14.5" y="3" width="2.4" height="12" fill="var(--band-2)"/><rect x="18.5" y="3" width="2.4" height="12" fill="var(--band-3)"/><rect x="22.5" y="3" width="2.4" height="12" fill="var(--band-5)"/></svg>
+      <span><strong>FET Lab</strong><small id="brandSub"></small></span>
+    </a>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="tr">TR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button id="themeBtn" class="icon-btn" type="button" aria-label="Tema">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar"><nav id="nav" aria-label="Bölümler"></nav></aside>
+    <div id="scrim" class="scrim"></div>
+    <main id="main" class="main"></main>
+  </div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/icons.js"></script>
+  <script src="assets/js/viz.js"></script>
+  <script src="assets/js/parts.js"></script>
+  <!-- pages: order here = order in the menu -->
+  <script src="pages/00-home.js"></script>
+  <script src="pages/simulator.js"></script>
+  <script src="pages/apps.js"></script>
+  <script src="pages/01-loads.js"></script>
+  <script src="pages/02-bjt.js"></script>
+  <script src="pages/03-mosfet.js"></script>
+  <script src="pages/04-mcu-io.js"></script>
+  <script src="pages/04b-outputs.js"></script>
+  <script src="pages/05-bjt-drive.js"></script>
+  <script src="pages/06-mosfet-drive.js"></script>
+  <script src="pages/07-topologies.js"></script>
+  <script src="pages/08-inductive.js"></script>
+  <script src="pages/09-switching.js"></script>
+  <script src="pages/10-gate-drivers.js"></script>
+  <script src="pages/11-inrush.js"></script>
+  <script src="pages/12-overcurrent.js"></script>
+  <script src="pages/13-thermal.js"></script>
+  <script src="pages/14-examples.js"></script>
+  <script src="pages/15-mistakes.js"></script>
+  <script src="pages/16-reference.js"></script>
+  <script src="pages/17-quiz-bank.js"></script>
+  <script src="pages/17-quiz.js"></script>
+  <script>App.start();</script>
+</body>
+</html>

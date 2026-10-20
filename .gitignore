@@ -1,0 +1,13 @@
+# generated
+build/
+dist/
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
